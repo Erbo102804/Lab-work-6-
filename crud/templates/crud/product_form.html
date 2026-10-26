@@ -1,0 +1,10 @@
+{% extends 'crud/base.html' %}
+{% block title %}Форма товара{% endblock %}
+{% block content %}
+<h2>{% if object %}Редактирование{% else %}Новый товар{% endif %}</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Сохранить</button>
+</form>
+{% endblock %}

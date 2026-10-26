@@ -1,0 +1,22 @@
+{% extends 'crud/base.html' %}
+{% block title %}Список товаров{% endblock %}
+{% block content %}
+<form method="get">
+  <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Поиск по названию">
+  <button type="submit">Найти</button>
+</form>
+<p><a class="btn" href="{% url 'crud:create' %}">+ Добавить</a></p>
+<table>
+  <tr><th>Название</th><th>Цена</th><th>Кол-во</th><th>Действия</th></tr>
+  {% for p in products %}
+  <tr>
+    <td><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></td>
+    <td>{{ p.price }}</td><td>{{ p.quantity }}</td>
+    <td><a href="{% url 'crud:update' p.pk %}">Изменить</a> |
+        <a href="{% url 'crud:delete' p.pk %}">Удалить</a></td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="4">Товаров пока нет</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}
